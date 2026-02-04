@@ -9,12 +9,8 @@ import { generateAndDownloadExcel } from "@/lib/excel-generator";
 import { sendSubmissionEmail } from "@/lib/email-service";
 import { 
   User, Mail, Phone, Building2, Globe, MapPin, FileText, Users, Target, 
-  Palette, Sparkles, Type, Megaphone, MessageCircle, Monitor, DollarSign, 
-  Calendar, Trophy, Package, Lightbulb, CheckCircle2, Rocket, 
-  Instagram, Linkedin, Facebook, Twitter, Youtube, TrendingUp,
-  Briefcase, Star, Heart, Eye, Zap, Award, Shield, Search, BarChart3,
-  ShoppingCart, TrendingDown, BookOpen, Languages, Accessibility, 
-  BarChart, LineChart, Clock, ThumbsUp, ThumbsDown, Image, Send
+  Calendar, CheckCircle2, Rocket,
+  Briefcase, Star, Heart, Zap, Sparkles
 } from "lucide-react";
 
 type FormData = {
