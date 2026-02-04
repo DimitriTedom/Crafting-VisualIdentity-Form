@@ -10,7 +10,7 @@ import { sendSubmissionEmail } from "@/lib/email-service";
 import { 
   User, Mail, Phone, Building2, Globe, MapPin, FileText, Users, Target, 
   Calendar, CheckCircle2, Rocket, Briefcase, Star, Heart, Zap, Sparkles,
-  Server, Shield, CreditCard, Layout, Key, PenTool, Image, Database
+  Server, Shield, PenTool
 } from "lucide-react";
 
 type FormData = {
