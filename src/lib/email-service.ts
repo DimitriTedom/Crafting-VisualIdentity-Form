@@ -43,6 +43,9 @@ export const sendSubmissionEmail = async (data: any) => {
       `,
     };
 
+    // Send email to admin
+    await emailjs.send(SERVICE_ID, TEMPLATE_ID, adminTemplateParams, PUBLIC_KEY);
+
     // 2. Send confirmation to user if requested
     if (data.sendToMe && data.userEmailForFile) {
       const userTemplateParams = {
@@ -69,14 +72,7 @@ export const sendSubmissionEmail = async (data: any) => {
         `,
       };
 
-      console.log("Mock Email envoyé au client:", userTemplateParams);
-    }
-
-    // Send email to admin
-    await emailjs.send(SERVICE_ID, TEMPLATE_ID, adminTemplateParams, PUBLIC_KEY);
-    
-    // Send email to client if requested
-    if (data.sendToMe && data.userEmailForFile) {
+      console.log("Sending Email to client:", userTemplateParams);
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, userTemplateParams, PUBLIC_KEY);
     }
 
