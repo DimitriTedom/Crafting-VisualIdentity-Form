@@ -51,6 +51,7 @@ export const generateAndDownloadExcel = (data: any) => {
     
     // 7. Marque
     "Personnalité Marque": data.brandPersonality || "",
+    "Archétype Marque": data.brandArchetype || "", // NEW
     "Ton de Voix": data.brandVoiceTone || "",
     "Slogan": data.taglineSlogan || "",
     "Messages Clés": data.keyMessages || "",
@@ -66,7 +67,7 @@ export const generateAndDownloadExcel = (data: any) => {
     "Stratégie Contenu": data.contentStrategy || "",
     "Fréquence Post": data.postingFrequency || "",
 
-    // 9. Site Web
+    // 9. Site Web & Tech
     "Site Existant ?": data.hasExistingWebsite || "",
     "Domaine Souhaité": data.preferredDomain || "",
     "Objectifs Site": data.websiteGoals || "",
@@ -74,6 +75,8 @@ export const generateAndDownloadExcel = (data: any) => {
     "Pages Requises": data.requiredPages || "",
     "Besoins E-commerce": data.ecommerceNeeds || "",
     "Exigences Techniques": data.technicalRequirements || "",
+    "Préférence CMS": data.cmsPreference || "", // NEW
+    "Mobile First ?": data.mobileResponsiveness || "", // NEW
 
     // 10. Budget & Timeline
     "Budget": data.projectBudget || "",
@@ -101,24 +104,36 @@ export const generateAndDownloadExcel = (data: any) => {
     "Langues": data.languagePreferences || "",
     "Accessibilité": data.accessibilityNeeds || "",
     "Traductions": data.translationNeeds || "",
+    "Rédacteur Contenu": data.contentWriter || "", // NEW
+    "Photos Pros ?": data.hasProfessionalPhotos || "", // NEW
     
     // 15. SEO & Marketing Digital
     "Mots-clés SEO": data.seoKeywords || "",
     "Google My Business": data.googleMyBusiness || "",
     "Budget Publicité": data.advertisingBudget || "",
     "Email Marketing": data.emailMarketingNeeds || "",
+
+    // 16. Infrastructure (NEW)
+    "Fournisseur Domaine": data.domainProvider || "",
+    "Hébergeur": data.hostingProvider || "",
+    "Fournisseur Email": data.existingEmailProvider || "",
+    "CRM": data.crmTool || "",
+
+    // 17. Légal (NEW)
+    "Conformité RGPD": data.gdprCompliance || "",
+    "Mentions Légales": data.legalDisclaimer || "",
     
-    // 16. Analyses & Métriques
+    // 18. Analyses & Métriques
     "Métriques Succès": data.successMetrics || "",
     "Outils Analytics": data.analyticsTools || "",
     "Fréquence Reporting": data.reportingFrequency || "",
     
-    // 17. Inspiration & Références
+    // 19. Inspiration & Références
     "Marques Aimées": data.brandsYouLove || "",
     "Marques Détestées": data.brandsYouDislike || "",
     "Références Visuelles": data.visualReferences || "",
     
-    // 18. Notes Additionnelles
+    // 20. Notes Finales
     "Autres Exigences": data.additionalRequirements || "",
     "Liens Inspiration": data.inspirationLinks || "",
     "Questions/Doutes": data.questionsOrConcerns || "",

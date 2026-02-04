@@ -33,13 +33,18 @@ export const sendSubmissionEmail = async (data: any) => {
         Couleurs : ${data.primaryColor} / ${data.secondaryColor}
 
         -- NOTE IMPORTANTE --
-        Le fichier Excel complet contenant TOUTES les 18 sections a été téléchargé sur l'ordinateur du client.
+        Le fichier Excel complet contenant TOUTES les 20 SECTIONS (Format SnowDev Audit) a été téléchargé sur l'ordinateur du client.
         
         ${data.sendToMe && data.userEmailForFile ? `
         ✅ Le client a également demandé à recevoir le fichier par email à : ${data.userEmailForFile}
         ` : ''}
         
-        Merci de contacter le client pour récupérer le fichier Excel complet.
+        Merci de contacter le client pour récupérer le fichier Excel complet et valider la stratégie IT/Marketing.
+
+        -- INFRASTRUCTURE RAPIDE --
+        Domaine : ${data.domainProvider}
+        Hébergement : ${data.hostingProvider}
+        CMS préféré : ${data.cmsPreference}
       `,
     };
 
@@ -50,24 +55,24 @@ export const sendSubmissionEmail = async (data: any) => {
     if (data.sendToMe && data.userEmailForFile) {
       const userTemplateParams = {
         to_email: data.userEmailForFile,
-        from_name: "Visual Identity Team",
+        from_name: "SnowDev Tech Services",
         company_name: data.companyName,
         message: `
           Bonjour ${data.contactName},
 
-          Merci d'avoir rempli notre formulaire d'identité visuelle pour ${data.companyName} !
+          Merci d'avoir complété l'Audit d'Identité Visuelle & Digitale pour ${data.companyName} !
 
-          📊 Votre fichier Excel a été généré avec succès et téléchargé sur votre ordinateur.
+          📊 Votre dossier complet (Format Excel) a été généré avec succès.
           
-          📧 Pour votre commodité, nous vous recommandons de nous envoyer ce fichier par email à : dimitritedom@gmail.com
+          🚀 PROCHAINES ÉTAPES :
+          1. Vérifiez que le fichier "Client_Identity_Form_${data.companyName}.xlsx" est bien dans vos téléchargements.
+          2. Veuillez nous renvoyer ce fichier en réponse à cet email ou à : dimitritedom@gmail.com
           
-          Nom du fichier : Client_Identity_Form_${data.companyName}.xlsx
+          Nos experts vont analyser vos 20 sections (Tech, Design, Stratégie) et revenir vers vous avec un plan d'action concret.
 
-          Notre équipe va analyser toutes vos réponses et vous contacter sous peu pour discuter de votre projet.
-
-          À très bientôt !
+          Cordialement,
           
-          L'équipe Visual Identity
+          L'équipe SnowDev Tech Services
           dimitritedom@gmail.com
         `,
       };

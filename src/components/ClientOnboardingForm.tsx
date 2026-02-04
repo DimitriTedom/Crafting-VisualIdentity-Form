@@ -9,8 +9,8 @@ import { generateAndDownloadExcel } from "@/lib/excel-generator";
 import { sendSubmissionEmail } from "@/lib/email-service";
 import { 
   User, Mail, Phone, Building2, Globe, MapPin, FileText, Users, Target, 
-  Calendar, CheckCircle2, Rocket,
-  Briefcase, Star, Heart, Zap, Sparkles
+  Calendar, CheckCircle2, Rocket, Briefcase, Star, Heart, Zap, Sparkles,
+  Server, Shield, CreditCard, Layout, Key, PenTool, Image, Database
 } from "lucide-react";
 
 type FormData = {
@@ -64,6 +64,7 @@ type FormData = {
   brandVoiceTone: string;
   taglineSlogan: string;
   keyMessages: string;
+  brandArchetype: string; // NEW
   
   // 8. Présence sur les Réseaux Sociaux
   socialPlatforms: string;
@@ -84,6 +85,8 @@ type FormData = {
   requiredPages: string;
   ecommerceNeeds: string;
   technicalRequirements: string;
+  cmsPreference: string; // NEW: WordPress, Shopify, Custom...
+  mobileResponsiveness: string; // NEW: Mobile first?
   
   // 10. Budget & Timeline
   projectBudget: string;
@@ -111,12 +114,24 @@ type FormData = {
   languagePreferences: string;
   accessibilityNeeds: string;
   translationNeeds: string;
+  contentWriter: string; // NEW: Who writes?
+  hasProfessionalPhotos: string; // NEW: Yes/No
   
   // 15. SEO & Marketing Digital
   seoKeywords: string;
   googleMyBusiness: string;
   advertisingBudget: string;
   emailMarketingNeeds: string;
+
+  // New Section: Infrastructure & Technique
+  domainProvider: string; // NEW
+  hostingProvider: string; // NEW
+  existingEmailProvider: string; // NEW
+  crmTool: string; // NEW (HubSpot, Salesforce...)
+  
+  // New Section: Légal & Conformité
+  gdprCompliance: string; // NEW
+  legalDisclaimer: string; // NEW
   
   // 16. Analyses & Métriques
   successMetrics: string;
@@ -194,32 +209,49 @@ export default function ClientOnboardingForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-white dark:from-gray-900 dark:via-blue-950/20 dark:to-gray-900 py-12">
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Header SPECTACULAIRE avec animation */}
         <div className="mb-16 text-center space-y-6 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-pink-400/20 blur-3xl -z-10 animate-pulse" />
-          <div className="inline-block p-4 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-3xl mb-6 shadow-2xl animate-bounce transform hover:scale-110 transition-transform duration-300">
-            <Sparkles className="w-16 h-16 text-white" />
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/10 to-indigo-400/10 blur-3xl -z-10 animate-pulse" />
+          
+          <div className="flex justify-center mb-6">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+              <div className="relative p-6 bg-white dark:bg-gray-800 rounded-full shadow-xl border border-blue-100 dark:border-blue-900">
+                <Sparkles className="w-16 h-16 text-blue-600 dark:text-blue-400" />
+              </div>
+            </div>
           </div>
-          <h1 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6 leading-tight drop-shadow-2xl">
-            ✨ Formulaire Identité Visuelle ✨
+
+          <h1 className="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 dark:from-white dark:via-blue-200 dark:to-white mb-2 tracking-tight">
+            SnowDev Tech Services
           </h1>
-          <p className="text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium">
-            🚀 Construisons ensemble votre marque de <span className="text-transparent bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text font-bold">RÊVE</span> ! 
-            <br />Prenez le temps de répondre à chaque question pour créer quelque chose d'<span className="text-transparent bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text font-bold">EXCEPTIONNEL</span>.
-          </p>
-          <div className="flex justify-center gap-3 flex-wrap mt-8">
-            <span className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-base font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              📋 18 Sections
-            </span>
-            <span className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-full text-base font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              🎯 100+ Questions
-            </span>
-            <span className="px-6 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-full text-base font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
-              ⚡ Ultra Complet
-            </span>
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">
+            Audit Identité Visuelle & Présence Digitale
+          </h2>
+          
+          <div className="max-w-3xl mx-auto bg-white/50 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl p-6 border border-blue-100 dark:border-blue-900 shadow-sm mt-8">
+            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              🚀 <span className="text-blue-600 font-bold">Objectif : Zéro Friction.</span><br/>
+              Ce formulaire est conçu pour capturer l'essence complète de votre projet. En le remplissant à 100%, vous permettez à notre équipe de déployer votre stratégie digitale complète <span className="italic">sans allers-retours inutiles</span>.
+            </p>
+          </div>
+
+          <div className="flex justify-center gap-4 flex-wrap mt-8">
+            <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg border border-blue-100 dark:border-blue-800">
+              <CheckCircle2 className="w-5 h-5" />
+              <span>Analyse 360°</span>
+            </div>
+             <div className="flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg border border-purple-100 dark:border-purple-800">
+              <Target className="w-5 h-5" />
+              <span>Stratégie Sur-Mesure</span>
+            </div>
+             <div className="flex items-center gap-2 px-4 py-2 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-lg border border-cyan-100 dark:border-cyan-800">
+              <Rocket className="w-5 h-5" />
+              <span>Déploiement Rapide</span>
+            </div>
           </div>
         </div>
 
@@ -609,27 +641,39 @@ export default function ClientOnboardingForm() {
         </Card>
 
         {/* 7. MARQUE & POSITIONNEMENT */}
-        <Card>
-            <CardHeader>
-            <CardTitle>7. Marque & Positionnement</CardTitle>
-            <CardDescription>La voix de votre marque.</CardDescription>
+        <Card className="border-l-4 border-l-amber-500 shadow-xl">
+            <CardHeader className="bg-gradient-to-r from-amber-50 to-transparent dark:from-amber-950/20">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl shadow-lg">
+                <Target className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <CardTitle className="text-2xl font-bold text-amber-900 dark:text-amber-100">7. Marque & Positionnement</CardTitle>
+                <CardDescription>L'âme et la voix de votre marque.</CardDescription>
+              </div>
+            </div>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 pt-6">
              <div className="space-y-2">
               <Label htmlFor="brandPersonality">Personnalité de la Marque</Label>
-              <Input id="brandPersonality" {...register("brandPersonality")} placeholder="Amicale, Autoritaire, Rebelle, Sophistiquée..." />
+              <Input id="brandPersonality" {...register("brandPersonality")} placeholder="Amicale, Autoritaire, Rebelle, Sophistiquée..." className="border-2 focus:border-amber-400 h-11" />
+            </div>
+            <div className="space-y-2">
+               <Label htmlFor="brandArchetype">Archétype de Marque (Optionnel)</Label>
+               <Input id="brandArchetype" {...register("brandArchetype")} placeholder="Le Héros, Le Sage, L'Explorateur, Le Créateur..." className="border-2 focus:border-amber-400 h-11" />
+               <p className="text-xs text-muted-foreground">Si vous connaissez votre archétype Jungien.</p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="brandVoiceTone">Ton de Voix</Label>
-              <Input id="brandVoiceTone" {...register("brandVoiceTone")} placeholder="Professionnel, Humoristique, Inspirant..." />
+              <Input id="brandVoiceTone" {...register("brandVoiceTone")} placeholder="Professionnel, Humoristique, Inspirant..." className="border-2 focus:border-amber-400 h-11" />
             </div>
              <div className="space-y-2">
               <Label htmlFor="taglineSlogan">Slogan / Tagline</Label>
-              <Input id="taglineSlogan" {...register("taglineSlogan")} placeholder="Just Do It, Think Different..." />
+              <Input id="taglineSlogan" {...register("taglineSlogan")} placeholder="Just Do It, Think Different..." className="border-2 focus:border-amber-400 h-11" />
             </div>
              <div className="space-y-2">
               <Label htmlFor="keyMessages">Messages Clés</Label>
-              <Textarea id="keyMessages" {...register("keyMessages")} placeholder="Quels sont les 3 points principaux à communiquer ?" />
+              <Textarea id="keyMessages" {...register("keyMessages")} placeholder="Quels sont les 3 points principaux à communiquer ?" className="border-2 focus:border-amber-400 min-h-[100px]" />
             </div>
           </CardContent>
         </Card>
@@ -682,40 +726,62 @@ export default function ClientOnboardingForm() {
           </CardContent>
         </Card>
 
-        {/* 9. SITE WEB */}
-        <Card>
-          <CardHeader>
-            <CardTitle>9. Besoins Site Web</CardTitle>
-            <CardDescription>Votre vitrine digitale.</CardDescription>
+        {/* 9. SITE WEB & TECH */}
+        <Card className="border-l-4 border-l-cyan-500 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-cyan-50 to-transparent dark:from-cyan-950/20">
+             <div className="flex items-center gap-3">
+              <div className="p-3 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl shadow-lg">
+                <Globe className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                 <CardTitle className="text-2xl font-bold text-cyan-900 dark:text-cyan-100">9. Besoins Site Web & Tech</CardTitle>
+                 <CardDescription>Votre vitrine digitale et infrastructure.</CardDescription>
+              </div>
+            </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-             <div className="space-y-2">
-              <Label htmlFor="hasExistingWebsite">Site Web Existant ?</Label>
-              <Input id="hasExistingWebsite" {...register("hasExistingWebsite")} placeholder="Oui/Non" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="preferredDomain">Nom de Domaine Souhaité</Label>
-              <Input id="preferredDomain" {...register("preferredDomain")} placeholder="www.mamarque.com" />
-            </div>
+          <CardContent className="space-y-4 pt-6">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="hasExistingWebsite">Site Web Existant ?</Label>
+                  <Input id="hasExistingWebsite" {...register("hasExistingWebsite")} placeholder="Oui/Non (URL si oui)" className="border-2 focus:border-cyan-400 h-11" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="preferredDomain">Nom de Domaine Souhaité</Label>
+                  <Input id="preferredDomain" {...register("preferredDomain")} placeholder="www.mamarque.com" className="border-2 focus:border-cyan-400 h-11" />
+                </div>
+             </div>
+             
              <div className="space-y-2">
               <Label htmlFor="websiteGoals">Objectifs du Site</Label>
-              <Textarea id="websiteGoals" {...register("websiteGoals")} placeholder="Vendre, Informer, Capturer des leads..." />
+              <Textarea id="websiteGoals" {...register("websiteGoals")} placeholder="Vendre, Informer, Capturer des leads, Portfolio..." className="border-2 focus:border-cyan-400 min-h-[80px]" />
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div className="space-y-2">
+                  <Label htmlFor="cmsPreference">Préférence CMS/Tech</Label>
+                  <Input id="cmsPreference" {...register("cmsPreference")} placeholder="WordPress, Shopify, React/Next.js, Webflow..." className="border-2 focus:border-cyan-400 h-11" />
+               </div>
+               <div className="space-y-2">
+                  <Label htmlFor="mobileResponsiveness">Expérience Mobile</Label>
+                  <Input id="mobileResponsiveness" {...register("mobileResponsiveness")} placeholder="Mobile First ? App Native ?" className="border-2 focus:border-cyan-400 h-11" />
+               </div>
+            </div>
+
              <div className="space-y-2">
               <Label htmlFor="websiteFeatures">Fonctionnalités Clés</Label>
-              <Textarea id="websiteFeatures" {...register("websiteFeatures")} placeholder="Blog, Boutique, Réservation, Espace Membre..." />
+              <Textarea id="websiteFeatures" {...register("websiteFeatures")} placeholder="Blog, Boutique, Réservation, Espace Membre, Chatbot, Newsletter..." className="border-2 focus:border-cyan-400 min-h-[100px]" />
             </div>
              <div className="space-y-2">
-              <Label htmlFor="requiredPages">Pages Requises</Label>
-              <Input id="requiredPages" {...register("requiredPages")} placeholder="Accueil, À Propos, Services, Contact..." />
+              <Label htmlFor="requiredPages">Arborescence / Pages Requises</Label>
+              <Input id="requiredPages" {...register("requiredPages")} placeholder="Accueil, À Propos, Services, Contact, CGV, Mentions Légales..." className="border-2 focus:border-cyan-400 h-11" />
             </div>
              <div className="space-y-2">
-              <Label htmlFor="ecommerceNeeds">Besoins E-commerce (si applicable)</Label>
-              <Textarea id="ecommerceNeeds" {...register("ecommerceNeeds")} placeholder="Nombre de produits, types de paiement..." />
+              <Label htmlFor="ecommerceNeeds">Besoins E-commerce (Détails)</Label>
+              <Textarea id="ecommerceNeeds" {...register("ecommerceNeeds")} placeholder="Nombre de produits, types de paiement (Stripe/PayPal), expédition, taxes..." className="border-2 focus:border-cyan-400 min-h-[80px]" />
             </div>
              <div className="space-y-2">
-              <Label htmlFor="technicalRequirements">Exigences Techniques</Label>
-              <Input id="technicalRequirements" {...register("technicalRequirements")} placeholder="WordPress, Shopify, React, Hébergement spécifique..." />
+              <Label htmlFor="technicalRequirements">Intégrations & API</Label>
+              <Input id="technicalRequirements" {...register("technicalRequirements")} placeholder="Lien avec CRM, Outils Marketing, ERP..." className="border-2 focus:border-cyan-400 h-11" />
             </div>
           </CardContent>
         </Card>
@@ -790,20 +856,258 @@ export default function ClientOnboardingForm() {
           </CardContent>
         </Card>
 
-         {/* 13. NOTES ADDITIONNELLES */}
-         <Card>
-          <CardHeader>
-            <CardTitle>13. Notes & Questions</CardTitle>
-            <CardDescription>Derniers détails.</CardDescription>
-          </CardHeader>
-           <CardContent className="space-y-4">
+        {/* 13. EXPÉRIENCE CLIENT & SERVICE */}
+        <Card className="border-l-4 border-l-teal-500 shadow-xl">
+           <CardHeader className="bg-gradient-to-r from-teal-50 to-transparent dark:from-teal-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-xl shadow-lg">
+                 <Heart className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-teal-900 dark:text-teal-100">13. Expérience Client (CX)</CardTitle>
+                  <CardDescription>Comment chouchoutez-vous vos clients ?</CardDescription>
+               </div>
+             </div>
+           </CardHeader>
+           <CardContent className="space-y-4 pt-6">
+              <div className="space-y-2">
+                <Label htmlFor="customerJourney">Le Parcours Client Idéal</Label>
+                <Textarea id="customerJourney" {...register("customerJourney")} placeholder="De la découverte à l'achat, décrivez les étapes..." className="border-2 focus:border-teal-400 min-h-[80px]" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="customerServiceApproach">Approche Service Client</Label>
+                <Textarea id="customerServiceApproach" {...register("customerServiceApproach")} placeholder="Réactif, Premium, Automatisé, Personnalisé ?" className="border-2 focus:border-teal-400 min-h-[60px]" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 <div className="space-y-2">
+                  <Label htmlFor="returnPolicy">Politique de Retour</Label>
+                  <Input id="returnPolicy" {...register("returnPolicy")} placeholder="30 jours, Satisfait ou remboursé..." className="border-2 focus:border-teal-400 h-11" />
+                </div>
+                 <div className="space-y-2">
+                  <Label htmlFor="deliveryTime">Délais de Livraison Moyens</Label>
+                  <Input id="deliveryTime" {...register("deliveryTime")} placeholder="24h, 1 semaine..." className="border-2 focus:border-teal-400 h-11" />
+                </div>
+              </div>
+           </CardContent>
+        </Card>
+
+        {/* 14. CONTENU & COMMUNICATION */}
+         <Card className="border-l-4 border-l-pink-500 shadow-xl">
+           <CardHeader className="bg-gradient-to-r from-pink-50 to-transparent dark:from-pink-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-lg">
+                 <PenTool className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-pink-900 dark:text-pink-100">14. Contenu & Communication</CardTitle>
+                  <CardDescription>Mots et images.</CardDescription>
+               </div>
+             </div>
+           </CardHeader>
+           <CardContent className="space-y-4 pt-6">
              <div className="space-y-2">
-               <Label htmlFor="additionalRequirements">Autres exigences</Label>
-               <Textarea id="additionalRequirements" {...register("additionalRequirements")} placeholder="Tout ce qu'on a oublié..." />
+                <Label htmlFor="contentTopics">Sujets Principaux</Label>
+                <Textarea id="contentTopics" {...register("contentTopics")} placeholder="De quoi allez-vous parler ? (Expertise, Lifestyle...)" className="border-2 focus:border-pink-400 min-h-[80px]" />
+             </div>
+             
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                   <Label htmlFor="contentWriter">Qui rédige le contenu ?</Label>
+                   <Input id="contentWriter" {...register("contentWriter")} placeholder="Nous, Vous (Client), Prestataire externe..." className="border-2 focus:border-pink-400 h-11" />
+                </div>
+                <div className="space-y-2">
+                   <Label htmlFor="hasProfessionalPhotos">Photos Professionnelles ?</Label>
+                   <Input id="hasProfessionalPhotos" {...register("hasProfessionalPhotos")} placeholder="Oui j'ai une banque d'images / Non il faut un shooting" className="border-2 focus:border-pink-400 h-11" />
+                </div>
+             </div>
+
+             <div className="space-y-2">
+                <Label htmlFor="languagePreferences">Langues du Site</Label>
+                <Input id="languagePreferences" {...register("languagePreferences")} placeholder="Français, Anglais, Espagnol..." className="border-2 focus:border-pink-400 h-11" />
              </div>
              <div className="space-y-2">
-               <Label htmlFor="questionsOrConcerns">Questions ou Préoccupations</Label>
-               <Textarea id="questionsOrConcerns" {...register("questionsOrConcerns")} placeholder="Avez-vous des doutes ?" />
+                <Label htmlFor="translationNeeds">Besoins en Traduction</Label>
+                <Textarea id="translationNeeds" {...register("translationNeeds")} placeholder="Avez-vous besoin d'un service de traduction ?" className="border-2 focus:border-pink-400 min-h-[60px]" />
+             </div>
+             <div className="space-y-2">
+                <Label htmlFor="accessibilityNeeds">Accessibilité (RGAA)</Label>
+                <Input id="accessibilityNeeds" {...register("accessibilityNeeds")} placeholder="Standards spécifiques à respecter ?" className="border-2 focus:border-pink-400 h-11" />
+             </div>
+           </CardContent>
+         </Card>
+
+        {/* 15. SEO & MARKETING DIGITAL */}
+        <Card className="border-l-4 border-l-orange-500 shadow-xl">
+           <CardHeader className="bg-gradient-to-r from-orange-50 to-transparent dark:from-orange-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl shadow-lg">
+                 <Target className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-orange-900 dark:text-orange-100">15. SEO & Marketing Digital</CardTitle>
+                  <CardDescription>Être visible.</CardDescription>
+               </div>
+             </div>
+           </CardHeader>
+           <CardContent className="space-y-4 pt-6">
+              <div className="space-y-2">
+                <Label htmlFor="seoKeywords">Mots-clés cibles</Label>
+                <Textarea id="seoKeywords" {...register("seoKeywords")} placeholder="Sur quels mots voulez-vous apparaître dans Google ?" className="border-2 focus:border-orange-400 min-h-[80px]" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="googleMyBusiness">Fiche Google (Maps)</Label>
+                <Input id="googleMyBusiness" {...register("googleMyBusiness")} placeholder="Avez-vous une adresse physique à référencer ?" className="border-2 focus:border-orange-400 h-11" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="advertisingBudget">Budget Publicitaire (Mensuel)</Label>
+                <Input id="advertisingBudget" {...register("advertisingBudget")} placeholder="Pour Google Ads / Facebook Ads..." className="border-2 focus:border-orange-400 h-11" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="emailMarketingNeeds">Email Marketing</Label>
+                <Textarea id="emailMarketingNeeds" {...register("emailMarketingNeeds")} placeholder="Newsletter, Automatisations, Outil actuel (Mailchimp...)" className="border-2 focus:border-orange-400 min-h-[60px]" />
+              </div>
+           </CardContent>
+        </Card>
+
+        {/* NEW SECTION: INFRASTRUCTURE & TECHNIQUE */}
+        <Card className="border-l-4 border-l-slate-600 shadow-xl">
+           <CardHeader className="bg-gradient-to-r from-slate-100 to-transparent dark:from-slate-800/40">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-slate-600 to-slate-800 rounded-xl shadow-lg">
+                 <Server className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-slate-100">16. Infrastructure & Technique</CardTitle>
+                  <CardDescription>Les fondations techniques.</CardDescription>
+               </div>
+             </div>
+           </CardHeader>
+           <CardContent className="space-y-4 pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="domainProvider">Fournisseur de Nom de Domaine</Label>
+                  <Input id="domainProvider" {...register("domainProvider")} placeholder="OVH, GoDaddy, Gandi..." className="border-2 focus:border-slate-400 h-11" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="hostingProvider">Hébergeur Actuel / Souhaité</Label>
+                  <Input id="hostingProvider" {...register("hostingProvider")} placeholder="Vercel, AWS, Hostinger..." className="border-2 focus:border-slate-400 h-11" />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 <div className="space-y-2">
+                  <Label htmlFor="existingEmailProvider">Fournisseur Email Pro</Label>
+                  <Input id="existingEmailProvider" {...register("existingEmailProvider")} placeholder="Google Workspace, Outlook, Webmail..." className="border-2 focus:border-slate-400 h-11" />
+                </div>
+                 <div className="space-y-2">
+                  <Label htmlFor="crmTool">Outil CRM</Label>
+                  <Input id="crmTool" {...register("crmTool")} placeholder="HubSpot, Salesforce, Notion, Excel..." className="border-2 focus:border-slate-400 h-11" />
+                </div>
+              </div>
+           </CardContent>
+        </Card>
+
+         {/* NEW SECTION: LÉGAL & CONFORMITÉ */}
+        <Card className="border-l-4 border-l-red-500 shadow-xl">
+           <CardHeader className="bg-gradient-to-r from-red-50 to-transparent dark:from-red-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-xl shadow-lg">
+                 <Shield className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-red-900 dark:text-red-100">17. Légal & Conformité</CardTitle>
+                  <CardDescription>Protection et règles.</CardDescription>
+               </div>
+             </div>
+           </CardHeader>
+           <CardContent className="space-y-4 pt-6">
+              <div className="space-y-2">
+                <Label htmlFor="gdprCompliance">Conformité RGPD / Cookies</Label>
+                <Input id="gdprCompliance" {...register("gdprCompliance")} placeholder="Avez-vous une politique de confidentialité ?" className="border-2 focus:border-red-400 h-11" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="legalDisclaimer">Mentions Légales Spécifiques</Label>
+                <Textarea id="legalDisclaimer" {...register("legalDisclaimer")} placeholder="Numéros d'agrément, certifications obligatoires à afficher..." className="border-2 focus:border-red-400 min-h-[60px]" />
+              </div>
+           </CardContent>
+        </Card>
+
+        {/* 18. ANALYSES & MÉTRIQUES */}
+        <Card className="border-l-4 border-l-indigo-500 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-indigo-50 to-transparent dark:from-indigo-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-xl shadow-lg">
+                 <Rocket className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-indigo-900 dark:text-indigo-100">18. Analyses & Métriques</CardTitle>
+                  <CardDescription>KPIs et Suivi.</CardDescription>
+               </div>
+             </div>
+          </CardHeader>
+          <CardContent className="space-y-4 pt-6">
+            <div className="space-y-2">
+              <Label htmlFor="successMetrics">Indicateurs de Succès (KPIs)</Label>
+              <Textarea id="successMetrics" {...register("successMetrics")} placeholder="Chiffre d'affaires, Trafic, Leads..." className="border-2 focus:border-indigo-400 min-h-[80px]" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="analyticsTools">Outils Analytics Actuels</Label>
+                <Input id="analyticsTools" {...register("analyticsTools")} placeholder="GA4, Hotjar..." className="border-2 focus:border-indigo-400 h-11" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="reportingFrequency">Besoin de Reporting</Label>
+                <Input id="reportingFrequency" {...register("reportingFrequency")} placeholder="Mensuel, Hebdomadaire..." className="border-2 focus:border-indigo-400 h-11" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+         {/* 19. INSPIRATION & RÉFÉRENCES */}
+        <Card className="border-l-4 border-l-fuchsia-500 shadow-xl">
+          <CardHeader className="bg-gradient-to-r from-fuchsia-50 to-transparent dark:from-fuchsia-950/20">
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gradient-to-br from-fuchsia-500 to-pink-500 rounded-xl shadow-lg">
+                 <Star className="w-6 h-6 text-white" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-fuchsia-900 dark:text-fuchsia-100">19. Inspiration & Références</CardTitle>
+                  <CardDescription>Ce que vous aimez (et détestez).</CardDescription>
+               </div>
+             </div>
+          </CardHeader>
+          <CardContent className="space-y-4 pt-6">
+            <div className="space-y-2">
+               <Label htmlFor="brandsYouLove">3 Marques que vous adorez</Label>
+               <Textarea id="brandsYouLove" {...register("brandsYouLove")} placeholder="Apple (pour la simplicité), Nike (pour l'énergie)..." className="border-2 focus:border-fuchsia-400 min-h-[80px]" />
+            </div>
+             <div className="space-y-2">
+               <Label htmlFor="brandsYouDislike">3 Marques que vous n'aimez pas</Label>
+               <Textarea id="brandsYouDislike" {...register("brandsYouDislike")} placeholder="Pourquoi ?" className="border-2 focus:border-fuchsia-400 min-h-[80px]" />
+            </div>
+          </CardContent>
+        </Card>
+
+         {/* 20. NOTES FINALES */}
+         <Card className="border-l-4 border-l-gray-500 shadow-xl bg-gray-50 dark:bg-gray-800/50">
+          <CardHeader>
+             <div className="flex items-center gap-3">
+               <div className="p-3 bg-gray-200 dark:bg-gray-700 rounded-xl shadow-inner">
+                 <FileText className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+               </div>
+               <div>
+                  <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">20. Notes Finales</CardTitle>
+                  <CardDescription>L'espace libre.</CardDescription>
+               </div>
+             </div>
+          </CardHeader>
+           <CardContent className="space-y-4 pt-6">
+             <div className="space-y-2">
+               <Label htmlFor="additionalRequirements">Autres exigences non mentionnées</Label>
+               <Textarea id="additionalRequirements" {...register("additionalRequirements")} placeholder="Tout ce qu'on a oublié..." className="border-2 focus:border-gray-400 min-h-[100px]" />
+             </div>
+             <div className="space-y-2">
+               <Label htmlFor="specialRequests">Demandes Spéciales</Label>
+               <Textarea id="specialRequests" {...register("specialRequests")} placeholder="Accessibilité, Urgence..." className="border-2 focus:border-gray-400 min-h-[80px]" />
              </div>
            </CardContent>
          </Card>
