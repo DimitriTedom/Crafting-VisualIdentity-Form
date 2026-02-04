@@ -1,10 +1,10 @@
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 
 // NOTE: You need to replace these with your actual EmailJS Service ID, Template ID, and Public Key
 // For now, these are placeholders.
-// const SERVICE_ID = "service_placeholder"; 
-// const TEMPLATE_ID = "template_placeholder";
-// const PUBLIC_KEY = "public_key_placeholder";
+const SERVICE_ID = "service_nspnbs4"; 
+const TEMPLATE_ID = "template_lagfdco";
+const PUBLIC_KEY = "maz6Ge-509Mrlt_IM";
 
 export const sendSubmissionEmail = async (data: any) => {
   try {
@@ -72,17 +72,19 @@ export const sendSubmissionEmail = async (data: any) => {
       console.log("Mock Email envoyé au client:", userTemplateParams);
     }
 
-    // In a real scenario with valid EmailJS keys:
-    // await emailjs.send(SERVICE_ID, TEMPLATE_ID, adminTemplateParams, PUBLIC_KEY);
-    // if (data.sendToMe && data.userEmailForFile) {
-    //   await emailjs.send(SERVICE_ID, TEMPLATE_ID, userTemplateParams, PUBLIC_KEY);
-    // }
+    // Send email to admin
+    await emailjs.send(SERVICE_ID, TEMPLATE_ID, adminTemplateParams, PUBLIC_KEY);
+    
+    // Send email to client if requested
+    if (data.sendToMe && data.userEmailForFile) {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, userTemplateParams, PUBLIC_KEY);
+    }
 
-    console.log("Mock Email Sent to dimitritedom@gmail.com:", adminTemplateParams);
+    console.log("Email Sent to dimitritedom@gmail.com:", adminTemplateParams);
     
     const confirmMsg = data.sendToMe && data.userEmailForFile 
-      ? `✅ Notifications envoyées à:\n- Admin: dimitritedom@gmail.com\n- Client: ${data.userEmailForFile}\n\n(En production avec EmailJS configuré)`
-      : `✅ Notification envoyée à dimitritedom@gmail.com\n\n(En production avec EmailJS configuré)`;
+      ? `✅ Notifications envoyées avec succès !\n\n- Admin: dimitritedom@gmail.com\n- Client: ${data.userEmailForFile}`
+      : `✅ Notification envoyée avec succès à dimitritedom@gmail.com !`;
     
     alert(confirmMsg);
     return true;
